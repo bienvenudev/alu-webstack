@@ -18,7 +18,7 @@ defaults
 frontend http-front
     bind *:80
     # Perform a 301 redirect to the HTTPS version of the URL
-    return 301 https://www.bienvenudev.tech%[req.uri]
+    http-request redirect scheme https code 301 unless { ssl_fc }
     reqadd X-Forwarded-Proto:\ http
     default_backend lb-back
 
